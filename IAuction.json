@@ -2031,7 +2031,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-15T11:50:16.644Z",
+  "updatedAt": "2021-04-15T11:58:16.442Z",
   "devdoc": {
     "methods": {
       "bid(uint256)": {
