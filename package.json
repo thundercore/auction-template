@@ -1,0 +1,18 @@
+{
+  "name": "auction-template",
+  "version": "1.0.0",
+  "description": "Example auction contract",
+  "main": "contracts/AuctionFactory.sol",
+  "repository": "git@github.com:thundercore/auction-template.git",
+  "author": "Chris Chu <chrischu@thundercore.tw>",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 12"
+  },
+  "scripts": {
+    "build": "truffle compile"
+  },
+  "devDependencies": {
+    "truffle": "^5.3.1"
+  }
+}
