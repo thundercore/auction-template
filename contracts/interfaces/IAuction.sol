@@ -6,6 +6,7 @@ interface IAuction {
 
     event NEW_BID(address indexed newBidder, address indexed prevBidder, uint256 newPrice, uint256 prevPrice);
     event BID_RETURNED(address indexed returnTo, uint256 amount);
+    event WITHDRAWED(address indexed account, uint256 amount);
 
     function currentBidder() external view returns(address);
     /** @notice Current bidding price, scaled by 1e18 */
@@ -31,4 +32,12 @@ interface IAuction {
     function withdraw() external returns(bool);
 
     function transferOwnership(address newOwner) external;
+
+    function initialize(
+        uint256 endTime,
+        address token,
+        uint256 initialPrice,
+        uint256 step,
+        address payable _owner
+    ) external;
 }
