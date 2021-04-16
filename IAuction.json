@@ -57,9 +57,9 @@
         },
         {
           "indexed": true,
-          "internalType": "uint256",
+          "internalType": "address",
           "name": "prevBidder",
-          "type": "uint256"
+          "type": "address"
         },
         {
           "indexed": false,
@@ -219,12 +219,12 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"AUCTION_CANCELED\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"AUCTION_STOPPED\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"returnTo\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"BID_RETURNED\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newBidder\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"prevBidder\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newPrice\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"prevPrice\",\"type\":\"uint256\"}],\"name\":\"NEW_BID\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"maxValue\",\"type\":\"uint256\"}],\"name\":\"bid\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"actualBidPrice\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"cancel\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"currentBidder\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"currentPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"remainTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"remainSeconds\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"stop\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"withdraw\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"bid(uint256)\":{\"details\":\"Every bidding increase by the \\\"step\\\" value. Users might bid over the price they saw in the UI.Set the maxValue to 0 presents no price limit restriction.\"}}},\"userdoc\":{\"methods\":{\"cancel()\":{\"notice\":\"Cancel the auction, contract-holded TT-ETH will return to the last bidder. \"},\"currentPrice()\":{\"notice\":\"Current bidding price, scaled by 1e18 \"},\"stop()\":{\"notice\":\"Force the auction stop. \"},\"withdraw()\":{\"notice\":\"Owner claim TT-ETH after auction stopped.  \"}}}},\"settings\":{\"compilationTarget\":{\"/home/runner/work/auction-template/auction-template/contracts/interfaces/IAuction.sol\":\"IAuction\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/runner/work/auction-template/auction-template/contracts/interfaces/IAuction.sol\":{\"keccak256\":\"0xb56f1e1924ec96eb89b335bd5039b6a511648129cbeab2062b0d0a779b93b11d\",\"urls\":[\"bzz-raw://bb8c61643cf92bdbf2f9549e2fb7a183ab18f54eb522925c0b7c2faef21cdf60\",\"dweb:/ipfs/Qmb3AWdCewo7QEFMHEF9AvaKHf6shgov5S6rd7niEAVNfr\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.17+commit.d19bba13\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"AUCTION_CANCELED\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"AUCTION_STOPPED\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"returnTo\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"BID_RETURNED\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newBidder\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"prevBidder\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newPrice\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"prevPrice\",\"type\":\"uint256\"}],\"name\":\"NEW_BID\",\"type\":\"event\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"maxValue\",\"type\":\"uint256\"}],\"name\":\"bid\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"actualBidPrice\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"cancel\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"currentBidder\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"currentPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"remainTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"remainSeconds\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"stop\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"withdraw\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"bid(uint256)\":{\"details\":\"Every bidding increase by the \\\"step\\\" value. Users might bid over the price they saw in the UI.Set the maxValue to 0 presents no price limit restriction.\"}}},\"userdoc\":{\"methods\":{\"cancel()\":{\"notice\":\"Cancel the auction, contract-holded TT-ETH will return to the last bidder. \"},\"currentPrice()\":{\"notice\":\"Current bidding price, scaled by 1e18 \"},\"stop()\":{\"notice\":\"Force the auction stop. \"},\"withdraw()\":{\"notice\":\"Owner claim TT-ETH after auction stopped.  \"}}}},\"settings\":{\"compilationTarget\":{\"/home/runner/work/auction-template/auction-template/contracts/interfaces/IAuction.sol\":\"IAuction\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/runner/work/auction-template/auction-template/contracts/interfaces/IAuction.sol\":{\"keccak256\":\"0xe0e2d734837b2dd5deb91c55781c51d58db5874725d1938736de3ae196113ae8\",\"urls\":[\"bzz-raw://2bc374d04a53ab2d670d14a4259daed0cc66895e06a5576a8cd7ac913c32054d\",\"dweb:/ipfs/QmNQneJbtFpVU1dwT4Zj9zDU5XAZsEwuwW2aoj1pR2GJL1\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity ^0.5.17;\n\ninterface IAuction {\n    event AUCTION_CANCELED(uint256 timestamp);\n    event AUCTION_STOPPED(uint256 timestamp);\n\n    event NEW_BID(address indexed newBidder, uint256 indexed prevBidder, uint256 newPrice, uint256 prevPrice);\n    event BID_RETURNED(address indexed returnTo, uint256 amount);\n\n    function currentBidder() external view returns(address);\n    /** @notice Current bidding price, scaled by 1e18 */\n    function currentPrice() external view returns(uint256);\n\n    /**\n     * @dev Every bidding increase by the \"step\" value. Users might bid over the price they saw in the UI.\n     * @dev Set the maxValue to 0 presents no price limit restriction.\n     */\n    function bid(uint256 maxValue) external returns(uint256 actualBidPrice);\n\n    function remainTime() external view returns(uint256 remainSeconds);\n\n    function owner() external view returns (address);\n\n    //// ADMIN functions\n\n    /** @notice Cancel the auction, contract-holded TT-ETH will return to the last bidder. */\n    function cancel() external returns(bool);\n    /** @notice Force the auction stop. */\n    function stop() external returns(bool);\n    /** @notice Owner claim TT-ETH after auction stopped.  */\n    function withdraw() external returns(bool);\n\n    function transferOwnership(address newOwner) external;\n}\n",
+  "source": "pragma solidity ^0.5.17;\n\ninterface IAuction {\n    event AUCTION_CANCELED(uint256 timestamp);\n    event AUCTION_STOPPED(uint256 timestamp);\n\n    event NEW_BID(address indexed newBidder, address indexed prevBidder, uint256 newPrice, uint256 prevPrice);\n    event BID_RETURNED(address indexed returnTo, uint256 amount);\n\n    function currentBidder() external view returns(address);\n    /** @notice Current bidding price, scaled by 1e18 */\n    function currentPrice() external view returns(uint256);\n\n    /**\n     * @dev Every bidding increase by the \"step\" value. Users might bid over the price they saw in the UI.\n     * @dev Set the maxValue to 0 presents no price limit restriction.\n     */\n    function bid(uint256 maxValue) external returns(uint256 actualBidPrice);\n\n    function remainTime() external view returns(uint256 remainSeconds);\n\n    function owner() external view returns (address);\n\n    //// ADMIN functions\n\n    /** @notice Cancel the auction, contract-holded TT-ETH will return to the last bidder. */\n    function cancel() external returns(bool);\n    /** @notice Force the auction stop. */\n    function stop() external returns(bool);\n    /** @notice Owner claim TT-ETH after auction stopped.  */\n    function withdraw() external returns(bool);\n\n    function transferOwnership(address newOwner) external;\n}\n",
   "sourcePath": "/home/runner/work/auction-template/auction-template/contracts/interfaces/IAuction.sol",
   "ast": {
     "absolutePath": "/home/runner/work/auction-template/auction-template/contracts/interfaces/IAuction.sol",
@@ -393,17 +393,18 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_uint256",
-                    "typeString": "uint256"
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
                   },
                   "typeName": {
                     "id": 12,
-                    "name": "uint256",
+                    "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "186:7:0",
+                    "stateMutability": "nonpayable",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
                     }
                   },
                   "value": null,
@@ -1239,15 +1240,16 @@
                       "scope": 19,
                       "stateVariable": false,
                       "storageLocation": "default",
-                      "type": "uint256",
+                      "type": "address",
                       "value": null,
                       "visibility": "internal"
                     },
                     "children": [
                       {
                         "attributes": {
-                          "name": "uint256",
-                          "type": "uint256"
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
                         },
                         "id": 12,
                         "name": "ElementaryTypeName",
@@ -2031,7 +2033,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-15T11:58:16.442Z",
+  "updatedAt": "2021-04-16T02:24:13.924Z",
   "devdoc": {
     "methods": {
       "bid(uint256)": {
