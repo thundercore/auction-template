@@ -10,7 +10,13 @@
     "node": ">= 12"
   },
   "scripts": {
-    "build": "truffle compile"
+    "build": "truffle compile",
+    "migrate": "truffle migrate",
+    "test": "truffle test"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts-ethereum-package": "^2.5.0",
+    "@openzeppelin/upgrades": "^2.8.0"
   },
   "devDependencies": {
     "truffle": "^5.3.1"
