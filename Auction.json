@@ -9349,7 +9349,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-19T06:09:09.246Z",
+  "updatedAt": "2021-04-19T06:10:45.446Z",
   "devdoc": {
     "methods": {
       "bid(uint256)": {
