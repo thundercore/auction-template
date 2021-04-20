@@ -12,17 +12,28 @@ contract AuctionFactory is IAuctionFactory, Ownable {
     address private template;
     address private token;
 
-    function createAuction(uint256 endTime, uint256 initialPrice, uint256 step, address payable _owner) external returns(address) {
+    function createAuction(
+        uint256 endTime,
+        uint256 initialPrice,
+        uint256 step,
+        address payable auctionOwner
+    ) external returns (address) {
         IAuction auction = cloneAuctionTemplate();
         auction.initialize(
             endTime,
             token,
             initialPrice,
             step,
-            _owner
+            auctionOwner
         );
 
-        emit AUCTION_CREATED(address(auction), _owner, endTime, initialPrice, step);
+        emit AUCTION_CREATED(
+            address(auction),
+            auctionOwner,
+            endTime,
+            initialPrice,
+            step
+        );
         return address(auction);
     }
 
@@ -36,6 +47,10 @@ contract AuctionFactory is IAuctionFactory, Ownable {
 
     function setTokenAddress(address _token) public onlyOwner {
         token = _token;
+    }
+
+    function getTokenAddress() public view returns (address) {
+        return token;
     }
 
     function cloneAuctionTemplate() internal returns (IAuction) {
