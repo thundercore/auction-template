@@ -6259,7 +6259,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-20T02:12:21.368Z",
+  "updatedAt": "2021-04-20T06:31:31.184Z",
   "devdoc": {
     "methods": {
       "allowance(address,address)": {
