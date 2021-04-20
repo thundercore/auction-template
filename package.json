@@ -12,7 +12,7 @@
   "scripts": {
     "build": "truffle compile",
     "migrate": "truffle migrate",
-    "test": "truffle test"
+    "test": "truffle test --show-events"
   },
   "dependencies": {
     "@openzeppelin/contracts-ethereum-package": "^2.5.0",
