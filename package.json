@@ -19,6 +19,9 @@
     "@openzeppelin/upgrades": "^2.8.0"
   },
   "devDependencies": {
+    "@openzeppelin/test-helpers": "^0.5.10",
+    "@truffle/hdwallet-provider": "^1.2.6",
+    "chai": "^4.3.4",
     "truffle": "^5.3.1"
   }
 }
