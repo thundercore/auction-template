@@ -1005,7 +1005,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-21T09:23:56.334Z",
+  "updatedAt": "2021-04-21T09:29:09.034Z",
   "devdoc": {
     "methods": {
       "bid(uint256)": {
