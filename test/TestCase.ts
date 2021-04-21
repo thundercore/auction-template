@@ -1,13 +1,63 @@
-const { expectEvent, expectRevert } = require('@openzeppelin/test-helpers')
 const { expect } = require('chai')
+const { expectEvent, expectRevert } = require('@openzeppelin/test-helpers')
 
 const Auction = artifacts.require('Auction')
 const AuctionFactory = artifacts.require('AuctionFactory')
 const IAuction = artifacts.require('IAuction')
+const IAuctionFactory = artifacts.require('IAuctionFactory')
 const MockAuction = artifacts.require('MockAuction')
 const Token = artifacts.require('ERC20Token')
 
 contract('Auction Test Suite', async function ([owner, ...users]) {
+  it('interaction with Web3 API', async () => {
+    // Deploy
+    const [{ address: FACTORY_ADDRESS }, { address: TOKEN_ADDRESS }] = await createInstances()
+
+    ///// Web3 interactions:
+    const [ProductOwner, Giannis, LeBron, Nikola, Luka, Stephen] = users
+
+    // 1. Production owner start a new auction for his production:
+    const factory = new web3.eth.Contract(IAuctionFactory.abi, FACTORY_ADDRESS, { gas: 500000 })
+
+    const receipt = await factory.methods.createAuction(
+      `${ Math.floor(Date.now() / 1000) + 3 * 24 * 60 * 60 }`, // Auction stop in 3 days
+      `${ 500 }`, // initial price: 500 * 10^-decimals of ERC20 token
+      `${ 10 }`, // Every bid increase by 10 * 10^-decimals
+      ProductOwner, // The owner of the auction
+    ).send({ from: ProductOwner })
+
+    const AUCTION_ADDRESS = receipt.events.AUCTION_CREATED.returnValues.auction
+
+    // 2. People can join the auction by the auction address
+    const auction = new web3.eth.Contract(IAuction.abi, AUCTION_ADDRESS, { gas: 100000 })
+    const token = new web3.eth.Contract(Token.abi, TOKEN_ADDRESS)
+
+    /// 2.1 People have to approve the "auction" to transfer their asset before bidding.
+    await token.methods.approve(AUCTION_ADDRESS, '500').send({ from: LeBron })
+    /// 2.2 The first one bid by the initial price, the '0' means no max price limit
+    await auction.methods.bid('0').send({ from: LeBron })
+
+    await token.methods.approve(AUCTION_ADDRESS, '510').send({ from: Stephen })
+    await auction.methods.bid('510').send({ from: Stephen })
+
+    await token.methods.approve(AUCTION_ADDRESS, '520').send({ from: Giannis })
+    await auction.methods.bid('0').send({ from: Giannis })
+
+    await token.methods.approve(AUCTION_ADDRESS, '530').send({ from: Nikola })
+    await auction.methods.bid('0').send({ from: Nikola })
+
+    await token.methods.approve(AUCTION_ADDRESS, '540').send({ from: Luka })
+    await auction.methods.bid('540').send({ from: Luka })
+
+    // 3. The owner can stop/cancel the auction, or wait util it's end
+    await auction.methods.stop().send({ from: ProductOwner })
+
+    // 4. Then the owner can withdraw the final bid
+    const { events: { WITHDRAWED } } = await auction.methods.withdraw().send({ from: ProductOwner })
+
+    expect(WITHDRAWED.returnValues.amount).to.be.bignumber.eq('540')
+  })
+
   it('interaction with Truffle API', async () => {
     const [factory, token] = await createInstances()
 
@@ -107,13 +157,13 @@ contract('Auction Test Suite', async function ([owner, ...users]) {
     })
     it('normally ends after time exceed end-time', async () => {
       await auction.setTime(`${endTime - 20}`)
-      const recipient1 = await bid(users[1], '1000')
-      expectEvent(recipient1, 'NEW_BID', { newBidder: users[1], newPrice: '1000' })
+      const receipt1 = await bid(users[1], '1000')
+      expectEvent(receipt1, 'NEW_BID', { newBidder: users[1], newPrice: '1000' })
 
       await auction.setTime(`${endTime - 10}`)
-      const recipient2 = await bid(users[2], '1010')
-      expectEvent(recipient2, 'NEW_BID', { newBidder: users[2], newPrice: '1010' })
-      expectEvent(recipient2, 'BID_RETURNED', { returnTo: users[1], amount: '1000' })
+      const receipt2 = await bid(users[2], '1010')
+      expectEvent(receipt2, 'NEW_BID', { newBidder: users[2], newPrice: '1010' })
+      expectEvent(receipt2, 'BID_RETURNED', { returnTo: users[1], amount: '1000' })
 
       await auction.setTime(`${endTime}`)
       await expectRevert(
@@ -129,8 +179,8 @@ contract('Auction Test Suite', async function ([owner, ...users]) {
     })
     it('can be stopped earlier by the owner', async () => {
       await auction.setTime(`${endTime - 20}`)
-      const recipient1 = await bid(users[1], '1000')
-      expectEvent(recipient1, 'NEW_BID', { newBidder: users[1], newPrice: '1000' })
+      const receipt = await bid(users[1], '1000')
+      expectEvent(receipt, 'NEW_BID', { newBidder: users[1], newPrice: '1000' })
 
       await auction.setTime(`${endTime - 10}`)
       await expectRevert(
@@ -152,8 +202,8 @@ contract('Auction Test Suite', async function ([owner, ...users]) {
     })
     it('can be canceled by the owner', async () => {
       await auction.setTime(`${endTime - 20}`)
-      const recipient1 = await bid(users[1], '1000')
-      expectEvent(recipient1, 'NEW_BID', { newBidder: users[1], newPrice: '1000' })
+      const receipt = await bid(users[1], '1000')
+      expectEvent(receipt, 'NEW_BID', { newBidder: users[1], newPrice: '1000' })
 
       await auction.setTime(`${endTime - 10}`)
       await expectRevert(
