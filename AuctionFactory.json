@@ -4252,7 +4252,7 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-04-21T09:29:09.028Z",
+  "updatedAt": "2021-04-21T09:34:25.335Z",
   "devdoc": {
     "methods": {
       "initialize(address)": {
